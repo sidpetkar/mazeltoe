@@ -52,12 +52,7 @@ class _ZenMazeAppState extends State<ZenMazeApp> {
         if (!kIsWeb) return child!;
         final colors = AppColors.of(context);
         return Container(
-          color: HSLColor.fromColor(colors.background)
-              .withLightness(
-                (HSLColor.fromColor(colors.background).lightness - 0.06)
-                    .clamp(0.0, 1.0),
-              )
-              .toColor(),
+          color: colors.background,
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 500),

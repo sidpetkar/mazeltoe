@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../main.dart';
 import '../models/maze_mode.dart';
 import '../services/game_progress_storage.dart';
+import '../services/motion_permission.dart';
 import '../services/settings_storage.dart';
 import '../theme/app_colors.dart';
 import 'circular_game_screen.dart';
@@ -85,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _openGame({required bool startNew}) async {
+    await requestMotionPermission();
     final current = _currentProgress;
     final startLvl = _selectedMode.startLevel;
     var level = current.$1;
@@ -182,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 24),
                 _settingsRow(
-                  label: 'Vibration',
+                  label: 'VIBRATION',
                   value: _vibrationEnabled,
                   colors: c,
                   onChanged: (v) {
@@ -193,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 12),
                 _settingsRow(
-                  label: 'Timer',
+                  label: 'TIMER',
                   value: _timerEnabled,
                   colors: c,
                   onChanged: (v) {
@@ -204,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 12),
                 _settingsRow(
-                  label: 'Dark Mode',
+                  label: 'DARK MODE',
                   value: _darkMode,
                   colors: c,
                   onChanged: (v) {

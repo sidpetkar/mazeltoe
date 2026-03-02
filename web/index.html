@@ -27,14 +27,28 @@
       padding: 0;
       height: 100%;
       overflow: hidden;
-      background-color: #F0F0F0;
+      background-color: #FFFFFF;
     }
     @media (prefers-color-scheme: dark) {
-      html, body { background-color: #141416; }
+      html, body { background-color: #1C1C1E; }
     }
   </style>
 </head>
 <body>
+  <script>
+    async function requestMotionPermission() {
+      if (typeof DeviceMotionEvent !== 'undefined'
+          && typeof DeviceMotionEvent.requestPermission === 'function') {
+        try {
+          var result = await DeviceMotionEvent.requestPermission();
+          return result === 'granted';
+        } catch (e) {
+          return false;
+        }
+      }
+      return true;
+    }
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
