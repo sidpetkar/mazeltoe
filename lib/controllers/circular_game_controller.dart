@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sensors_plus/sensors_plus.dart';
+import '../services/accelerometer.dart';
 import 'package:vibration/vibration.dart';
 
 import '../models/circular_maze.dart';

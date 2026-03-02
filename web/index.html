@@ -48,6 +48,27 @@
       }
       return true;
     }
+
+    var _motionX = 0, _motionY = 0, _motionZ = 0;
+    var _motionStarted = false;
+    function startMotionListener() {
+      if (_motionStarted) return;
+      _motionStarted = true;
+      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var sign = isIOS ? -1 : 1;
+      window.addEventListener('devicemotion', function(e) {
+        var a = e.accelerationIncludingGravity;
+        if (a) {
+          _motionX = sign * (a.x || 0);
+          _motionY = sign * (a.y || 0);
+          _motionZ = sign * (a.z || 0);
+        }
+      });
+    }
+    function getMotionX() { return _motionX; }
+    function getMotionY() { return _motionY; }
+    function getMotionZ() { return _motionZ; }
   </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
