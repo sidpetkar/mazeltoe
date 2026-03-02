@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'services/settings_storage.dart';
 import 'theme/app_colors.dart';
@@ -47,6 +48,24 @@ class _ZenMazeAppState extends State<ZenMazeApp> {
       theme: _buildTheme(Brightness.light),
       darkTheme: _buildTheme(Brightness.dark),
       themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+      builder: (context, child) {
+        if (!kIsWeb) return child!;
+        final colors = AppColors.of(context);
+        return Container(
+          color: HSLColor.fromColor(colors.background)
+              .withLightness(
+                (HSLColor.fromColor(colors.background).lightness - 0.06)
+                    .clamp(0.0, 1.0),
+              )
+              .toColor(),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: child,
+            ),
+          ),
+        );
+      },
       home: const HomeScreen(),
     );
   }
